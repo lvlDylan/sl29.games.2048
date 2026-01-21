@@ -17,10 +17,7 @@ def nouvelle_partie() -> Tuple[List[List[int]], int]:
     :return: Une grille TAILLExTAILLE initialisée avec deux tuiles, ainsi que le score à 0.
     :rtype: Tuple[List[List[int]], int]
     """
-    plateau = _creer_plateau_vide()
-    plateau = _ajouter_tuile(plateau)
-    plateau = _ajouter_tuile(plateau)
-    return plateau, 0
+    raise NotImplementedError("Fonction nouvelle_partie non implémentée.")
 
 def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]], int, bool]:
     """
@@ -34,25 +31,7 @@ def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]
     :rtype: tuple[List[List[int]], int, bool]
     """
 
-    # En fonction de la direction choisie on effectue les déplacement du plateau
-    if direction == "g":
-        nouveau, points_du_coup = _deplacer_gauche(plateau)
-    elif direction == "d":
-        nouveau, points_du_coup = _deplacer_droite(plateau)
-    elif direction == "h":
-        nouveau, points_du_coup = _deplacer_haut(plateau)
-    elif direction == 'b':
-        nouveau, points_du_coup = _deplacer_bas(plateau)
-    else:
-        return plateau, 0, False
-
-    if nouveau != plateau:
-        nouveau = _ajouter_tuile(nouveau)
-
-    # Vérification si partie terminée ou non
-    fini: bool = _partie_terminee(nouveau)
-
-    return nouveau, points_du_coup, fini
+    raise NotImplementedError("Fonction jouer_coup non implémentée.")
 
 # ==========================================================
 # 🔒 FONCTIONS PRIVÉES (LOGIQUE INTERNE)
@@ -64,13 +43,7 @@ def _creer_plateau_vide() -> List[List[int]]:
     :return: Une grille vide.
     :rtype: List[List[int]]
     """
-    plateau: List[List[int]] = []
-    for _ in range(TAILLE):
-        ligne: List[int] = []
-        for _ in range(TAILLE):
-            ligne.append(0)
-        plateau.append(ligne)
-    return plateau
+    raise NotImplementedError("Fonction _creer_plateau_vide non implémentée.")
 
 def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
     """
@@ -81,12 +54,7 @@ def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
     :return: Une liste de coordonnées
     :rtype: List[Tuple[int, int]]
     """
-    cases_vides: List[Tuple[int, int]] = []
-    for i in range(TAILLE):
-        for j in range(TAILLE):
-            if plateau[i][j] == 0:
-                cases_vides.append((i, j))
-    return cases_vides
+    raise NotImplementedError("Fonction _get_cases_vides non implémentée.")
 
 def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     """
@@ -97,19 +65,7 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     :return: Une nouvelle grille avec une tuile ajoutée.
     :rtype: List[List[int]]
     """
-    nouveau: List[List[int]] = []
-    for ligne in plateau:
-        nouvelle_ligne: List[int] = []
-        for valeur in ligne:
-            nouvelle_ligne.append(valeur)
-        nouveau.append(nouvelle_ligne)
-
-    cases_vides = _get_cases_vides(nouveau)
-    if cases_vides:
-        i, j = random.choice(cases_vides)
-        nouveau[i][j] = 2
-
-    return nouveau
+    raise NotImplementedError("Fonction _ajouter_tuile non implémentée.")
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
     """
@@ -120,11 +76,7 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :return: La ligne sans zéros.
     :rtype: List[int]
     """
-    resultat: List[int] = []
-    for valeur in ligne:
-        if valeur != 0:
-            resultat.append(valeur)
-    return resultat
+    raise NotImplementedError("Fonction _supprimer_zeros non implémentée.")
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     """
@@ -135,77 +87,25 @@ def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     :return: La ligne après fusion, les points gagnés
     :rtype: Tuple[List[int], int]
     """
-    points = 0
-    fusion: List[int] = []
-    i = 0
-    while i < len(ligne):
-        # pour fusionner il faut que la case courante ne soit pas la derniere et qu'elle soit égale à la case suivante
-        if i+1 < len(ligne) and ligne[i] == ligne[i+1]:
-            points += ligne[i]+ligne[i+1]
-            fusion.append(ligne[i]+ligne[i+1])
-            i+=2
-        else:
-            fusion.append(ligne[i])
-            i+=1
-    return fusion, points
+    raise NotImplementedError("Fonction _fusionner non implémentée.")
 
-def _completer_zeros(ligne: List[int])-> List[int]:
+def _completer_zeros(ligne): # ajouter les annotations de type
     """
-    Ajoute les 0 manquants à la fin de notre ligne
-
-    :param ligne: Une ligne sans zéros.
-    :type ligne: List[int]
-    :return: une ligne avec les zéros ajoutés
-    :rtype: List[int]
+    DOCSTRING À ECIRE
     """
-    nouvelle_ligne: List[int] = []
-    # Je crée une liste remplie de 0
-    for _ in range(TAILLE):
-        nouvelle_ligne.append(0)
-    # J'écrase les premières cases avec le contenu des cases de ligne
-    for i in range(len(ligne)):
-        nouvelle_ligne[i] = ligne[i]
-    return nouvelle_ligne
+    raise NotImplementedError("Fonction _completer_zeros non implémentée.")
 
-def _deplacer_gauche(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
+def _deplacer_gauche(plateau) : # ajouter les annotations de type
     """
-    Déplace les tuiles vers la gauche en fusionnant les valeurs identiques.
-
-    :param plateau: La grille actuelle du jeu.
-    :type plateau: List[List[int]]
-    :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
-    :rtype: Tuple[List[List[int]], int]
+    DOCSTRING À ÉCRIRE
     """
-    nouveaux_points = 0
-    nouveau_plateau: List[List[int]] = []
+    raise NotImplementedError("Fonction _deplacer_gauche non implémentée.")
 
-    for ligne in plateau:
-        ligne_sans_zeros = _supprimer_zeros(ligne)
-        ligne_fusionnee, points = _fusionner(ligne_sans_zeros)# <--- Bien récupérer les points ici
-        nouveaux_points += points # <--- Et les cumuler
-        ligne_finale = _completer_zeros(ligne_fusionnee)
-        nouveau_plateau.append(ligne_finale)
-    return nouveau_plateau, nouveaux_points
-
-def _inverser_lignes(plateau: List[List[int]]) -> List[List[int]]:
+def _inverser_lignes(plateau): # ajouter les annotations de type
     """
-    Inverse l'ordre des éléments de chaque ligne.
-
-    :param plateau: La grille actuelle.
-    :type plateau: List[List[int]]
-    :return: La grille modifiée.
-    :rtype: List[List[int]]
+    DOCSTRING À ÉCRIRE
     """
-    lignes_inversees: List[List[int]] = []
-    for ligne in plateau:
-        nouvelle_ligne: List[int] = []
-        i = len(ligne) - 1
-        while i >= 0:
-            nouvelle_ligne.append(ligne[i])
-            i -= 1
-        lignes_inversees.append(nouvelle_ligne)
-
-    return lignes_inversees
+    raise NotImplementedError("Fonction _inverser_lignes non implémentée.")
 
 def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
@@ -216,27 +116,13 @@ def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     :rtype: Tuple[List[List[int]], int]
     """
-    plateau_inverse = _inverser_lignes(plateau)
-    plateau_deplace, nouveaux_points = _deplacer_gauche(plateau_inverse)
-    plateau_final = _inverser_lignes(plateau_deplace)
-    return plateau_final, nouveaux_points
+    raise NotImplementedError("Fonction _deplacer_droite non implémentée.")
 
-def _transposer(plateau: List[List[int]]) -> List[List[int]]:
+def _transposer(plateau): # ajouter les annotations de type
     """
-    Transpose la grille (lignes ↔ colonnes).
-
-    :param plateau: La grille à transposer.
-    :return: La grille transposée.
+    DOCSTRING À ÉCRIRE
     """
-    nouveau_plateau: List[List[int]] = []
-
-    for i in range(TAILLE):
-        ligne: List[int] = []
-        for j in range(TAILLE):
-            ligne.append(plateau[j][i])
-        nouveau_plateau.append(ligne)
-
-    return nouveau_plateau
+    raise NotImplementedError("Fonction _transposer non implémentée.")
 
 def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
@@ -245,10 +131,7 @@ def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :param plateau: La grille actuelle du jeu.
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     """
-    plateau_transpose = _transposer(plateau)
-    plateau_deplace, nouveaux_points  = _deplacer_gauche(plateau_transpose)
-    plateau_final = _transposer(plateau_deplace)
-    return plateau_final, nouveaux_points
+    raise NotImplementedError("Fonction _deplacer_haut non implémentée.")
 
 
 def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
@@ -258,34 +141,14 @@ def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :param plateau: La grille actuelle du jeu.
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     """
-    plateau_transpose = _transposer(plateau)
-    plateau_deplace, nouveaux_points = _deplacer_droite(plateau_transpose)
-    plateau_final = _transposer(plateau_deplace)
-    return plateau_final, nouveaux_points
+    raise NotImplementedError("Fonction _deplacer_bas non implémentée.")
 
 def _partie_terminee(plateau: List[List[int]]) -> bool:
     """
-    Indique si aucun déplacement n'est possible.
-
-    :param plateau: La grille actuelle.
-    :return: True si la partie est terminée, False sinon.
+    DOCSTRING À ÉCRIRE
     """
     # Partie non terminee si il y a des cases vides
     # Partie non terminee si il y a des fusions possibles (horizontale ou verticale)
     # Sinon c'est vrai
 
-    # 1. S'il reste une case vide, ce n'est pas fini
-    if _get_cases_vides(plateau):
-        return False
-
-    # 2. Vérifier les fusions possibles (horizontalement et verticalement)
-    for i in range(TAILLE):
-        for j in range(TAILLE):
-            # Fusion horizontale possible ?
-            if j + 1 < TAILLE and plateau[i][j] == plateau[i][j+1]:
-                return False
-            # Fusion verticale possible ?
-            if i + 1 < TAILLE and plateau[i][j] == plateau[i+1][j]:
-                return False
-
-    return True
+    raise NotImplementedError("Fonction _partie_terminee non implémentée.")
