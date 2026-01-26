@@ -17,8 +17,13 @@ def nouvelle_partie() -> Tuple[List[List[int]], int]:
     :return: Une grille TAILLExTAILLE initialisée avec deux tuiles, ainsi que le score à 0.
     :rtype: Tuple[List[List[int]], int]
     """
-    raise NotImplementedError("Fonction nouvelle_partie non implémentée.")
-
+    #raise NotImplementedError("Fonction nouvelle_partie non implémentée.")
+    plateau = _creer_plateau_vide()
+    score = 0
+    for _ in range(2):
+        plateau = _ajouter_tuile(plateau)
+    return plateau, score
+            
 def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]], int, bool]:
     """
     Effectuer un mouvement sur le plateau.
@@ -72,6 +77,11 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     :return: Une nouvelle grille avec une tuile ajoutée.
     :rtype: List[List[int]]
     """
+    vides = _get_cases_vides(plateau)
+    nouveau_plateau = [ligne.copy() for ligne in plateau]
+    aleatoire = random.randint(0, len(vides) - 1)
+    nouveau_plateau[vides[aleatoire][0]][vides[aleatoire][1]] = 2
+    return nouveau_plateau
     #raise NotImplementedError("Fonction _ajouter_tuile non implémentée.")
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
@@ -83,7 +93,11 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :return: La ligne sans zéros.
     :rtype: List[int]
     """
-    raise NotImplementedError("Fonction _supprimer_zeros non implémentée.")
+    for nombre, index in enumerate(ligne):
+        if nombre == 0:
+            ligne[index] = 0
+    return ligne
+    #raise NotImplementedError("Fonction _supprimer_zeros non implémentée.")
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     """
@@ -94,6 +108,8 @@ def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     :return: La ligne après fusion, les points gagnés
     :rtype: Tuple[List[int], int]
     """
+    #for nombre, index in enumerate(ligne):
+        
     raise NotImplementedError("Fonction _fusionner non implémentée.")
 
 def _completer_zeros(ligne): # ajouter les annotations de type
