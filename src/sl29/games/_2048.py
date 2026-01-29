@@ -141,10 +141,10 @@ def _completer_zeros(ligne): # ajouter les annotations de type
 def _deplacer_gauche(plateau) : # ajouter les annotations de type
     """
     Déplace les tuiles vers la gauche si possible.
-    :param ligne: Le plateau.
-    :type ligne: List[List[int]]
-    :return: La ligne avec déplacement à gauche si possible
-    :rtype: List[List[int]]
+    :param plateau: Le plateau.
+    :type plateau: List[List[int]]
+    :return: La plateau avec déplacement à gauche si possible et les nouveaux points
+    :rtype: List[List[int]], int
     """
     nouveau_plateau = []
     nouveau_point = 0
@@ -159,8 +159,13 @@ def _deplacer_gauche(plateau) : # ajouter les annotations de type
 
 def _inverser_lignes(plateau): # ajouter les annotations de type
     """
-    DOCSTRING À ÉCRIRE
+    Inverse les lignes du plateau
+    :param plateau: Le plateau.
+    :type plateau: List[List[int]]
+    :return: Le plateau inversé
+    :rtype: List[List[int]]
     """
+    return [ligne[::-1] for ligne in plateau ]
     raise NotImplementedError("Fonction _inverser_lignes non implémentée.")
 
 def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
