@@ -140,8 +140,21 @@ def _completer_zeros(ligne): # ajouter les annotations de type
 
 def _deplacer_gauche(plateau) : # ajouter les annotations de type
     """
-    DOCSTRING À ÉCRIRE
+    Déplace les tuiles vers la gauche si possible.
+    :param ligne: Le plateau.
+    :type ligne: List[List[int]]
+    :return: La ligne avec déplacement à gauche si possible
+    :rtype: List[List[int]]
     """
+    nouveau_plateau = []
+    nouveau_point = 0
+    for ligne in plateau:
+        lignes_sans_zero = _supprimer_zeros(ligne)
+        ligne_fusion, points = _fusionner(lignes_sans_zero)
+        nouveau_point += points
+        ligne_finale = _completer_zeros(ligne_fusion)
+        nouveau_plateau.append(ligne_finale)
+    return nouveau_plateau, nouveau_point
     raise NotImplementedError("Fonction _deplacer_gauche non implémentée.")
 
 def _inverser_lignes(plateau): # ajouter les annotations de type
