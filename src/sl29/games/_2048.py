@@ -93,10 +93,7 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :return: La ligne sans zéros.
     :rtype: List[int]
     """
-    for nombre, index in enumerate(ligne):
-        if nombre == 0:
-            ligne[index] = 0
-    return ligne
+    return [e for e in ligne if e != 0]
     #raise NotImplementedError("Fonction _supprimer_zeros non implémentée.")
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
