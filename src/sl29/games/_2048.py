@@ -36,8 +36,17 @@ def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]
     :rtype: tuple[List[List[int]], int, bool]
     """
 
-    raise NotImplementedError("Fonction jouer_coup non implémentée.")
-
+    if direction == 'g':
+        plateau, points = _deplacer_gauche(plateau)
+    elif direction == 'd':
+        plateau, points = _deplacer_droite(plateau)
+    elif direction == 'h':
+        plateau, points = _deplacer_haut(plateau)
+    elif direction == 'b':
+        plateau, points = _deplacer_bas(plateau)
+    else:
+        return plateau, points, True
+    return plateau, points, False
 # ==========================================================
 # 🔒 FONCTIONS PRIVÉES (LOGIQUE INTERNE)
 # ==========================================================
@@ -49,7 +58,6 @@ def _creer_plateau_vide() -> List[List[int]]:
     :rtype: List[List[int]]
     """
     return [[0 * j for j in range(TAILLE)] for _ in range(TAILLE)]
-    # raise NotImplementedError("Fonction _creer_plateau_vide non implémentée.")
 
 def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
     """
@@ -66,7 +74,6 @@ def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
             if valeur == 0:
                 cases_vides.append((num_ligne, num_case))
     return cases_vides
-    #raise NotImplementedError("Fonction _get_cases_vides non implémentée.")
 
 def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     """
@@ -82,7 +89,6 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     aleatoire = random.randint(0, len(vides) - 1)
     nouveau_plateau[vides[aleatoire][0]][vides[aleatoire][1]] = 2
     return nouveau_plateau
-    #raise NotImplementedError("Fonction _ajouter_tuile non implémentée.")
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
     """
@@ -94,7 +100,6 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :rtype: List[int]
     """
     return [e for e in ligne if e != 0]
-    #raise NotImplementedError("Fonction _supprimer_zeros non implémentée.")
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     """
@@ -116,13 +121,10 @@ def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
             points += ligne[i] + ligne[i + 1]
             i+=2
         else:
-            print(f"Valeur {ligne[i]}")
             fusion.append(ligne[i])
             i += 1
     return fusion, points
     
-    #raise NotImplementedError("Fonction _fusionner non implémentée.")
-
 def _completer_zeros(ligne): # ajouter les annotations de type
     """
     Compléter la ligne par des 0.
@@ -136,7 +138,6 @@ def _completer_zeros(ligne): # ajouter les annotations de type
         ligne.append(0)
         length += 1
     return ligne
-    raise NotImplementedError("Fonction _completer_zeros non implémentée.")
 
 def _deplacer_gauche(plateau) : # ajouter les annotations de type
     """
@@ -155,7 +156,6 @@ def _deplacer_gauche(plateau) : # ajouter les annotations de type
         ligne_finale = _completer_zeros(ligne_fusion)
         nouveau_plateau.append(ligne_finale)
     return nouveau_plateau, nouveau_point
-    raise NotImplementedError("Fonction _deplacer_gauche non implémentée.")
 
 def _inverser_lignes(plateau): # ajouter les annotations de type
     """
@@ -166,7 +166,6 @@ def _inverser_lignes(plateau): # ajouter les annotations de type
     :rtype: List[List[int]]
     """
     return [ligne[::-1] for ligne in plateau ]
-    raise NotImplementedError("Fonction _inverser_lignes non implémentée.")
 
 def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
@@ -177,6 +176,8 @@ def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     :rtype: Tuple[List[List[int]], int]
     """
+    nouveau_plateau_inverse, points = _deplacer_gauche(_inverser_lignes(plateau))
+    return _inverser_lignes(nouveau_plateau_inverse), points
     raise NotImplementedError("Fonction _deplacer_droite non implémentée.")
 
 def _transposer(plateau): # ajouter les annotations de type
